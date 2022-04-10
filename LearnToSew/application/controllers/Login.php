@@ -21,6 +21,7 @@ class Login extends CI_Controller {
 	}
 	public function check_login()
 	{
+		
 		$data['error']= "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!! </div> ";
 		$this->load->view('template/header');
 		$username = $this->input->post('username'); //getting username from login form

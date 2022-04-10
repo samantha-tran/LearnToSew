@@ -41,7 +41,7 @@ class Register extends CI_Controller {
             $this->user_model->register_user($username, $email, $password);
         }
 
-        redirect('register', $data);
+        $this->load->view('register', $data);
 
     }
 }
