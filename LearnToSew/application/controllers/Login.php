@@ -10,22 +10,22 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$data['error']= "";
+		$data['error'] = "";
+		
 		if (!$this->session->userdata('logged_in'))
 		{
 			$this->load->view('login', $data);
 		} else {
 			$this->load->view('homepage');
 		}
-		$this->load->view('template/footer');
 	}
 	public function check_login()
 	{
-		
-		$data['error']= "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!! </div> ";
-		$this->load->view('template/header');
-		$username = $this->input->post('username'); //getting username from login form
-		$password = $this->input->post('password'); //getting password from login form
+		$data['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!</div> ";
+
+		$username = $this->input->post('username'); //get username from login form
+		$password = $this->input->post('password'); //get password from login form
+
 		if (!$this->session->userdata('logged_in'))
 		{
 			if ($this->user_model->login($username, $password)) //check if username and password is valid
@@ -42,7 +42,6 @@ class Login extends CI_Controller {
 		} else {
 			redirect('homepage'); //user is already logged in so redirect to homepage
 		}
-		$this->load->view('template/footer');
 	}
 
 	public function logout()

@@ -6,25 +6,81 @@
 			<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 	</head>
   <body>
-	<div class="container">
-		<div class="col-4 offset-4">
-				<?php echo form_open(base_url().'register/register'); ?>
-					<h2 class="text-center">Register</h2>       
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" required="required" name="username">
-						</div>
-                        <div class="form-group">
-							<input type="email" class="form-control" placeholder="Email" required="required" name="email">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" required="required" name="password">
-						</div>
-						<div class="form-group">
-						<?php echo $error; ?>
-						</div>
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-block">Register</button>
-						</div>  
-				<?php echo form_close(); ?>
-		</div>
-	</div>
+      <!-- https://mdbootstrap.com/docs/standard/extended/registration/ -->
+        <section class="vh-100" style="background-color: #0069d9;">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                            <?php echo form_open(base_url().'register/register'); ?>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example1c">Username</label>
+                                    <input name="username" required="required" type="text" value="<?php echo set_value('username'); ?>" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example3c">Email</label>
+                                    <input name="email" required="required" type="email" value="<?php echo set_value('email'); ?>" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">Password</label>
+                                    <input name="password" required="required" type="password" value="<?php echo set_value('password'); ?>" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <?php 
+                                    if (null != validation_errors()) {
+                                        echo "<div class='alert alert-danger' role='alert'>" . validation_errors() . "</div>";
+                                    }
+                                ?>
+                            </div>
+
+                            <div class="form-check d-flex mb-5">
+                                <input
+                                class="form-check-input me-2"
+                                type="checkbox"
+                                value=""
+                                required="required"
+                                id="form2Example3c"
+                                />
+                                <label class="form-check-label" for="form2Example3">
+                                I agree all statements in <a href="#!">Terms of service</a>
+                                </label>
+                            </div>
+
+                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                            </div>
+
+                            <?php echo form_close(); ?>
+
+                        </div>
+                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>

@@ -6,10 +6,8 @@
     public function login($username, $password){
         // Validate
         $this->db->where('username', $username);
-        $this->db->where('password', $password);
         $result = $this->db->get('users');
-
-        if($result->num_rows() == 1){
+        if($result->num_rows() == 1 && password_verify($password, trim($result->row()->password))) {
             return true;
         } else {
             return false;
@@ -38,25 +36,26 @@
         }
     }
 
-    // Check if password is sufficient strength
-    public function check_password($password) {
-        $number    = preg_match('@[0-9]@', $password);
-        $specialChar = preg_match('@[^\w]@', $password);
-        $uppercase = preg_match('@[A-Z]@', $password);
-
-        if (!$number || !$specialChar || strlen($password) < 8) {
-            return false;
-        } else {
+    public function contains_special($str) {
+        if (preg_match('@[^\w]@', $str)) {
             return true;
+        } else {
+            return false;
         }
     }
 
-    public function register_user($username, $email, $password) {
-        $query = "INSERT INTO users(username, email, password) VALUES ('$username', '$email', '$password')";
-        $this->db->query($query);
+    public function generate_random_string($length = 5) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
-
-
+    public function register_user($data) {
+        $this->db->insert('users', $data);
+    }
 }
 ?>
