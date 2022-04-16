@@ -14,9 +14,22 @@ class Login extends CI_Controller {
 		
 		if (!$this->session->userdata('logged_in'))
 		{
-			$this->load->view('login', $data);
+			if (get_cookie('remember')) {
+				$username = get_cookie('username'); //get the username from cookie
+				$password = get_cookie('password'); //get the username from cookie
+				if ($this->user_model->login($username, $password)) {
+					$user_data = array(
+						'username' => $username,
+						'logged_in' => true //create session variable
+					);
+					$this->session->set_userdata($user_data);
+					redirect('home'); //redirect user to login page
+				}
+			} else {
+				$this->load->view('login', $data);
+			}
 		} else {
-			$this->load->view('homepage');
+			redirect('home');
 		}
 	}
 	public function check_login()
@@ -25,8 +38,9 @@ class Login extends CI_Controller {
 
 		$username = $this->input->post('username'); //get username from login form
 		$password = $this->input->post('password'); //get password from login form
+		$remember = $this->input->post('remember'); //get remember me from login form
 
-		if (!$this->session->userdata('logged_in'))
+		if (!$this->session->userdata('logged_in')) //check if user is already logged in
 		{
 			if ($this->user_model->login($username, $password)) //check if username and password is valid
 			{
@@ -34,13 +48,18 @@ class Login extends CI_Controller {
 					'username' => $username,
 					'logged_in' => true //create session variable
 				);
+				if ($remember) { // if remember me is activated create cookie
+					set_cookie("username", $username, '300'); //set cookie username
+					set_cookie("password", $password, '300'); //set cookie password
+					set_cookie("remember", $remember, '300'); //set cookie remember
+				}
 				$this->session->set_userdata($user_data);
-				redirect('homepage'); //redirect user to login page
+				redirect('login'); //redirect user to login page
 			} else {
 				$this->load->view('login', $data); //if username and/or password is incorrect, show error message and ask user to re-attempt login
 			}
 		} else {
-			redirect('homepage'); //user is already logged in so redirect to homepage
+			redirect('login'); //user is already logged in so redirect to homepage
 		}
 	}
 

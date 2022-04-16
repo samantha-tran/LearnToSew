@@ -35,7 +35,7 @@
                         <div class="d-flex justify-content-around align-items-center mb-4">
                             <!-- Checkbox -->
                             <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" checked />
+                            <input class="form-check-input" type="checkbox" value="1" name="remember" checked="checked"/>
                             <label class="form-check-label"> Remember me </label>
                             </div>
                             <a href="<?php echo BASE_URL(); ?>register">Sign Up</a>

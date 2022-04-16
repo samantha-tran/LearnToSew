@@ -20,8 +20,13 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('template/header');
-		$this->load->view('homepage');
-		$this->load->view('template/footer');
+		if ($this->user_model->is_verified($this->session->userdata('username'))) {
+			$this->load->view('template/header');
+			$this->load->view('homepage');
+			$this->load->view('template/footer');
+		} else {
+			redirect('verify');
+		}
+		
 	}
 }

@@ -36,6 +36,7 @@
         }
     }
 
+    //TODO: put to helper class
     public function contains_special($str) {
         if (preg_match('@[^\w]@', $str)) {
             return true;
@@ -44,8 +45,9 @@
         }
     }
 
+    //TODO: put to helper class
     public function generate_random_string($length = 5) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -56,6 +58,43 @@
 
     public function register_user($data) {
         $this->db->insert('users', $data);
+    }
+
+    public function validate_token($username, $token) {
+        return $this->get_verification_token($username) == $token;
+    }
+
+    public function verify_account($username) {
+        $this->db->set('is_verified', 1)
+                 ->where('username', $username);
+        $this->db->update('users');
+    }
+
+    public function get_verification_token($username) {
+        $result = $this->db->select('verification_token')
+                 ->where('username', $username)
+                 ->limit(1)
+                 ->get('users')
+                 ->row();
+        return $result->verification_token;
+    }
+
+    public function get_email($username) {
+        $result = $this->db->select('email')
+                 ->where('username', $username)
+                 ->limit(1)
+                 ->get('users')
+                 ->row();
+        return $result->email;
+    }
+
+    public function is_verified($username) {
+        $result = $this->db->select('is_verified')
+                 ->where('username', $username)
+                 ->limit(1)
+                 ->get('users')
+                 ->row();
+        return $result->is_verified == 1;
     }
 }
 ?>
