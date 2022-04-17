@@ -20,13 +20,16 @@ class Course extends CI_Controller {
 	 */
 	public function index()
 	{
-		
-	}
-
-    public function create()
-    {
-        $this->load->view('template/header');
+		$this->load->view('template/header');
         $this->load->view('create_course');
         $this->load->view('template/footer');
+	}
+
+    public function upload()
+    {
+		$data = array();
+
+		// Count total files
+		$countfiles = count($_FILES['videoFiles']['name']);
     }
 }

@@ -11,7 +11,7 @@
     <h1><a href="<?php echo base_url(); ?>home">Learn To Sew</a></h1>
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url(); ?>course/create">Upload a course</a>
+        <a class="nav-link" href="<?php echo base_url(); ?>course">Upload a course</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Search Courses</a>

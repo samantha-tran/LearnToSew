@@ -1,5 +1,5 @@
 <div class="container my-5">
-    <form>
+    <?php echo form_open_multipart('course/upload');?>
     <div class="form-group">
         <label for="exampleFormControlInput1">Course Title</label>
         <input type="email" class="form-control" id="exampleFormControlInput1">
@@ -26,7 +26,19 @@
             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
     </div>
+    <div class="form-group my-5 p-2">
+        <label class="my-1 mr-2">Upload Course Videos</label>
+        <div>
+            <input type="file" name="videoFiles[]" multiple size="20" /> 
+        </div>
+    </div>
+    <div class="form-group my-5 p-2">
+        <label class="my-1 mr-2">Upload PDF Patterns</label>
+        <div>
+            <input type="file" name="patternFiles[]" multiple size="20" /> 
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
+    <?php echo form_close(); ?>
 </div>
-    
-    </form>
 </div>
