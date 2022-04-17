@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Course extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,15 +20,13 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		//only load if user is signed in and verified
-		if ($this->session->userdata('username') == null) {
-			redirect('login');
-		} else if ($this->user_model->is_verified($this->session->userdata('username'))) {
-			$this->load->view('template/header');
-			$this->load->view('homepage');
-			$this->load->view('template/footer');
-		} else {
-			redirect('verify');
-		}
+		
 	}
+
+    public function create()
+    {
+        $this->load->view('template/header');
+        $this->load->view('create_course');
+        $this->load->view('template/footer');
+    }
 }

@@ -21,6 +21,7 @@ class Verify extends CI_Controller {
             $this->user_model->verify_account($this->session->userdata('username'));
 
             //redirect to main page
+            redirect('home');
         }
         
     }
