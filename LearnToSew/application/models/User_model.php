@@ -88,6 +88,15 @@
         return $result->email;
     }
 
+    public function get_ID($username) {
+        $result = $this->db->select('id')
+                 ->where('username', $username)
+                 ->limit(1)
+                 ->get('users')
+                 ->row();
+        return $result->id;
+    }
+
     public function is_verified($username) {
         $result = $this->db->select('is_verified')
                  ->where('username', $username)

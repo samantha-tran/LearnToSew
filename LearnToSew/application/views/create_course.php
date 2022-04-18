@@ -2,15 +2,15 @@
     <?php echo form_open_multipart('course/upload');?>
     <div class="form-group">
         <label for="exampleFormControlInput1">Course Title</label>
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" name="title" required>
     </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Course Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" required rows="3"></textarea>
+        <textarea class="form-control" name='description' required rows="3"></textarea>
     </div>
     <div class="form-group">
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Course Difficulty</label>
-        <select class="custom-select my-1 mr-sm-2" required>
+        <select class="custom-select my-1 mr-sm-2" name='difficulty' required>
             <option value="Beginner">Beginner</option>
             <option value="2">Intermediate</option>
             <option value="3">Advanced</option>
@@ -22,7 +22,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input type="text" class="form-control" required aria-label="Amount (to the nearest dollar)">
+            <input type="text" name='price' class="form-control" required aria-label="Amount (to the nearest dollar)">
         </div>
     </div>
     <div class="form-group my-2 p-2">
@@ -34,7 +34,7 @@
     <div class="form-group my-2 p-2">
         <label class="my-1 mr-2">Upload Course Videos</label>
         <div>
-            <input type="file" name="videoFiles" required size="20" /> 
+            <input type="file" name="videoFile" required size="20" /> 
         </div>
     </div>
     <div class="form-group my-2 p-2">

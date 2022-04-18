@@ -2,14 +2,19 @@
  //put your code here
  class Course_model extends CI_Model{
 
-    public function upload($filename, $path, $courseID) {
+    public function upload_course($title, $description, $difficulty, $price) {
         $data = array(
-            'filename' => $filename,
-            'path' => $path,
-            'courseID' => $courseID
+            'title' => $title,
+            'descript' => $description,
+            'skill' => $difficulty,
+            'price' => $price,
+            'authorID' => $this->user_model->get_ID($this->session->userdata['username'])
         );
 
-        $query = $this->db->insert('patterns', $data);
+        $query = $this->db->insert('courses', $data);
+        return $this->db->insert_id();
     }
+
+    
 }
 ?>
