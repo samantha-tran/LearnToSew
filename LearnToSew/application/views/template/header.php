@@ -13,9 +13,11 @@
       <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url();?>course">Upload a course</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url();?>search">Search Courses</a>
-      </li>
+      <?php if($this->session->userdata('logged_in')) : ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url();?>user"> My Courses </a>
+        </li>
+      <?php endif; ?>
       <li class="nav-item">
         <a class="nav-link" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width=20px height=20px viewBox="0 0 20 20" fill="currentColor">
@@ -33,7 +35,6 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Profile</a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">My Purchases</a>
             <a class="dropdown-item" href="#">Settings</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo base_url(); ?>login/logout">Log out</a>
@@ -42,4 +43,6 @@
       <?php endif; ?>
     </ul>
 </nav>
+
+
 
