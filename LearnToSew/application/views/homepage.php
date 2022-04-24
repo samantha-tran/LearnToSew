@@ -5,7 +5,7 @@
 
 </style>
 
-<div id="container">
+<div>
 	<h1>Your Courses</h1>
 	<div class="container">
 		<div class="row">

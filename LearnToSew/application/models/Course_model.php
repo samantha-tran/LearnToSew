@@ -34,6 +34,19 @@
         return $this->db->insert_id();
     }
 
+    public function search_courses($query) {
+        if ($query == '') {
+            return null;
+        } else {
+            $this->db->select('title');
+            $this->db->from('courses');
+            $this->db->like('title', $query);
+            $this->db->or_like('descript', $query);
+            $this->db->order_by('title', 'DESC');
+            return $this->db->get();
+        }
+    }
+
     
 }
 ?>
