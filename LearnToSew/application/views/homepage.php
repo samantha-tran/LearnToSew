@@ -12,6 +12,37 @@
             </button>
         </div>
     <?php form_close();?>
+    
+	<div class="container">
+        <h1 class="title">Recently Uploaded Courses</h1>
+		<div class="row flex flex-wrap">
+			<?php 
+			$recent_course_template = "
+				<div class='col'>
+					<div class='card'>
+						<div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
+							<img src='%s' class='img-fluid fill'/>
+							<a href='#!'>
+							<div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div>
+							</a>
+						</div>
+						<div class='card-body'>
+							<h5 class='card-title'>%s</h5>
+							<p class='card-text'>%s</p>
+                            <a href='%s' class='btn btn-primary'>View</a>
+						</div>
+					</div>
+				</div>
+			";
+            $recent_courses = $this->course_model->get_recent_courses();
+			foreach ($recent_courses->result() as $row) {
+                
+                $thumbnail = $this->course_model->get_course_thumbnail($row->courseID);
+				echo sprintf($recent_course_template, base_url().'uploads/images/'.$thumbnail->filename, $row->title, $row->descript, base_url()."course/details/".$row->courseID);
+			}
+			?>
+		</div>
+	</div>
 </div>
 </body>
 <style scoped>
@@ -35,6 +66,20 @@
     .autocomplete {
         background-color: gray;
         width: 40vw;
+    }
+
+    .fill {
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .card {
+        width: 300px;
+    }
+
+    .title {
+        padding: 40px;
+        text-align: center;
     }
 </style>
 <script>

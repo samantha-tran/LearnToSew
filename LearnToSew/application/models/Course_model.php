@@ -29,7 +29,8 @@
             'descript' => $description,
             'skill' => $difficulty,
             'price' => $price,
-            'authorID' => $this->user_model->get_ID($this->session->userdata['username'])
+            'authorID' => $this->user_model->get_ID($this->session->userdata['username']),
+            'createdDate' => date('Y-m-d H:i:s')
         );
 
         $query = $this->db->insert('courses', $data);
@@ -49,6 +50,42 @@
         }
     }
 
-    
+    public function get_recent_courses($limit = 12) {
+        $this->db->select('*');
+            $this->db->from('courses');
+            $this->db->order_by('createdDate', 'DESC');
+            $this->db->limit($limit);  
+            return $this->db->get();
+    }
+
+    public function get_course_thumbnail($id) {
+        $this->db->select('filename');
+            $this->db->from('images');
+            $this->db->where('courseID', $id);
+            $this->db->limit(1);  
+            return $this->db->get()->row();
+    }
+
+    public function course_exists($courseID) {
+        $this->db->where('courseID', $courseID);
+        $result = $this->db->get('courses');
+        if($result->num_rows() == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_course_details($courseID) {
+        $this->db->select(array('courses.title as title', 'courses.descript as description', 'username', 'images.filename as image', 'videos.filename as video'));
+            $this->db->from('courses');
+            $this->db->join('images', 'courses.courseID = images.courseID', 'inner');
+            $this->db->join('patterns', 'courses.courseID = patterns.courseID', 'inner');
+            $this->db->join('videos', 'courses.courseID = videos.courseID', 'inner');
+            $this->db->join('users', 'users.ID = courses.authorID', 'inner');
+            $this->db->where('courses.courseID', $courseID);
+            $this->db->limit(1);  
+            return $this->db->get()->row();
+    }
 }
 ?>

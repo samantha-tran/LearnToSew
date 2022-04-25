@@ -39,5 +39,16 @@ class Course extends CI_Controller {
 		}
 	}
 
+	public function details($id = null) {
+		if ($id && $this->course_model->course_exists($id)) {
+			$this->load->view('template/header');
+			$this->load->view('course_details', array('course_details'=> $this->course_model->get_course_details($id)));
+			$this->load->view('template/footer');
+			
+		} else {
+			show_404();
+		}
+	}
+
 	
 }

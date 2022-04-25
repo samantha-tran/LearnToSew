@@ -5,11 +5,11 @@
     <?php echo form_open_multipart('course/upload');?>
     <div class="form-group">
         <label for="exampleFormControlInput1">Course Title</label>
-        <input type="text" class="form-control" name="title" required>
+        <input type="text" autocomplete="off" class="form-control" name="title" required>
     </div>
     <div class="form-group">
         <label for="exampleFormControlTextarea1">Course Description</label>
-        <textarea class="form-control" name='description' required rows="3"></textarea>
+        <textarea autocomplete="off" class="form-control" name='description' required rows="3"></textarea>
     </div>
     <div class="form-group">
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Course Difficulty</label>
@@ -25,7 +25,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
             </div>
-            <input type="text" name='price' class="form-control" required aria-label="Amount (to the nearest dollar)">
+            <input autocomplete="off" type="text" name='price' class="form-control" required aria-label="Amount (to the nearest dollar)">
         </div>
     </div>
     <div class="d-flex justify-content-around">
