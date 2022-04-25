@@ -29,7 +29,15 @@ class Course extends CI_Controller {
     {
 		//upload course
 		$courseID = $this->course_model->upload($this->input->post('title'), $this->input->post('description'), $this->input->post('difficulty'), $this->input->post('price'));
-    }
+		
+		if ($courseID != null) {
+			redirect('home');
+		} else {
+			$this->load->view('template/header');
+			$this->load->view('create_course', array('error' => $this->upload->display_errors()));
+			$this->load->view('template/footer');
+		}
+	}
 
 	
 }

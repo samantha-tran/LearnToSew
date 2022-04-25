@@ -16,8 +16,10 @@
         //delete course created as well as any files uploaded
         if (!$success || $this->db->trans_status() === FALSE) {
             $this->db->trans_rollback();
+            return null;
         } else {
             $this->db->trans_commit();
+            return $courseID;
         }
     }
 

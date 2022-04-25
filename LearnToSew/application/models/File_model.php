@@ -34,7 +34,7 @@
     public function upload_thumbnail($courseID) {
         //upload thumbail image
 		$config['upload_path'] = 'uploads/images';
-		$config['allowed_types'] = 'jpg|jpeg';
+		$config['allowed_types'] = 'jpg|jpeg|png';
 		$config['max_size'] = 10000;
 		$config['max_width'] = 500;
 		$config['max_height'] = 500;
