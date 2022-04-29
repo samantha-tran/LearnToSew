@@ -40,7 +40,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Profile</a>
           <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="<?php base_url();?>user/details">My Details</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo base_url(); ?>login/logout">Log out</a>
           </div>

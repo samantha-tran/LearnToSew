@@ -15,24 +15,30 @@
     }
 
     // Check if username already exists
-    public function check_username($username) {
-        $this->db->where('username', $username);
-        $result = $this->db->get('users');
-        if($result->num_rows() == 1){
-            return false;
+    public function check_username($username, $userID = null) {
+        if ($userID) {
+            $this->db->where('username', $username);
+            $this->db->where('id !=', $userID);
+            $result = $this->db->get('users');
+            return !$result->num_rows() == 1;
         } else {
-            return true;
+            $this->db->where('username', $username);
+            $result = $this->db->get('users');
+            return !$result->num_rows() == 1;
         }
     }
 
     // Check if email already exists
-    public function check_email($email) {
-        $this->db->where('email', $email);
-        $result = $this->db->get('users');
-        if($result->num_rows() == 1){
-            return false;
+    public function check_email($email, $userID = null) {
+        if ($userID) {
+            $this->db->where('email', $email);
+            $this->db->where('id !=', $userID);
+            $result = $this->db->get('users');
+            return !$result->num_rows() == 1;
         } else {
-            return true;
+            $this->db->where('email', $email);
+            $result = $this->db->get('users');
+            return !$result->num_rows() == 1;
         }
     }
 
@@ -104,6 +110,31 @@
                  ->get('users')
                  ->row();
         return $result->is_verified == 1;
+    }
+
+    public function get_user_details($username) {
+        $result = $this->db->select('*')
+                 ->where('username', $username)
+                 ->get('users');
+        return $result->row();
+    }
+
+    public function update_user_details($userID, $username, $email, $password) {
+        //check which fields are to be updated
+        if ($username) {
+            $data['username'] = $username;
+        }
+        if ($email) {
+            $data['email'] = $email;
+        }
+        if ($password) {
+            $data['password'] = $password;
+        }
+
+        if ($username || $email || $password) {
+            $this->db->where('id', $userID);
+            $this->db->update('users', $data);
+        }
     }
 }
 ?>

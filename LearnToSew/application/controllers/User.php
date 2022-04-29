@@ -31,4 +31,59 @@ class User extends CI_Controller {
 			redirect('verify');
 		}
 	}
+
+	public function details() {
+		$user_details = $this->user_model->get_user_details($_SESSION['username']);
+		$this->load->view('template/header');
+		$this->load->view('user_details',  array('error' => "", 'user_details'=> $this->user_model->get_user_details($_SESSION['username'])));
+		$this->load->view('template/footer');
+	}
+
+	public function update() {
+		$this->load->library('form_validation');
+
+		$username = $this->input->post('username');
+		$email = $this->input->post('email');
+		$password = $this->input->post('password');
+		$error = "";
+
+		//check if username is unique
+		if ($username && !$this->user_model->check_username($username, $this->user_model->get_ID($_SESSION['username']))) {
+			$error .= "Username is already taken.";
+		}
+
+		//check if email is unique
+		if ($email && !$this->user_model->check_email($email, $this->user_model->get_ID($_SESSION['username']))) {
+			$error .= "Email has already been used.";
+		}
+
+		//check if password is sufficiently strong
+		$this->form_validation->set_rules('password', 'Password',
+            array(
+                'trim',
+                'required',
+                'min_length[8]',
+                array('password_callable', array($this->user_model, 'contains_special')
+			)));
+
+		if ($password && $this->form_validation->run() == FALSE) {
+			$error .= "Password must be at least 8 characters and contain at least 1 special character.";
+		}
+
+		if ($error != "") {
+			$this->load->view('template/header');
+			$this->load->view('user_details', array('error' => $error, 'user_details' => $this->user_model->get_user_details($_SESSION['username'])));
+			$this->load->view('template/footer');
+		} else {
+			// update details in DB
+			echo $this->user_model->update_user_details($this->user_model->get_ID($_SESSION['username']), $username, $email, $password);
+
+			// update session details
+			$this->session->set_userdata('username', $username);
+			$this->load->view('template/header');
+			$this->load->view('user_details', array('error' => "", 'user_details' => $this->user_model->get_user_details($_SESSION['username'])));
+			$this->load->view('template/footer');
+		}
+		
+	}
 }
