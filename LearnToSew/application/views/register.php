@@ -21,7 +21,6 @@
                             <?php echo form_open(base_url().'register/register'); ?>
 
                             <div class="d-flex flex-row align-items-center mb-4">
-                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
                                     <label class="form-label" for="form3Example1c">Username</label>
                                     <input name="username" required="required" type="text" value="<?php echo set_value('username'); ?>" class="form-control" />
@@ -29,7 +28,6 @@
                             </div>
 
                             <div class="d-flex flex-row align-items-center mb-4">
-                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
                                     <label class="form-label" for="form3Example3c">Email</label>
                                     <input name="email" required="required" type="email" value="<?php echo set_value('email'); ?>" class="form-control" />
@@ -37,10 +35,32 @@
                             </div>
 
                             <div class="d-flex flex-row align-items-center mb-4">
-                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                 <div class="form-outline flex-fill mb-0">
                                     <label class="form-label" for="form3Example4c">Password</label>
                                     <input name="password" required="required" type="password" value="<?php echo set_value('password'); ?>" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">Secret Question</label>
+                                    <select class="form-control" name="secret-question" aria-label="Default select example">
+                                        <option value="What is your mother's maiden name?" selected>What is your mother's maiden name?</option>
+                                        <option value="What was your first pet?">What was your first pet?</option>
+                                        <option value="What was the model of your first car?">What was the model of your first car?</option>
+                                        <option value="What was your father's middle name?">What was your father's middle name?</option>
+                                        <option value="What was your childhood nickname?">What was your childhood nickname?</option>
+                                        <option value="What is your oldest sibling's middle name?">What is your oldest sibling's middle name?</option>
+                                        <option value="In what city or town did your parents meet?">In what city or town did your parents meet?</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example4c">Answer</label>
+                                    <input name="answer" required="required" type="text" value="<?php echo set_value('password'); ?>" class="form-control" />
                                 </div>
                             </div>
 

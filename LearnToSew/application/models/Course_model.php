@@ -77,7 +77,7 @@
     }
 
     public function get_course_details($courseID) {
-        $this->db->select(array('courses.title as title', 'courses.descript as description', 'username', 'images.filename as image', 'videos.filename as video'));
+        $this->db->select(array('courses.courseID as courseID', 'courses.title as title', 'courses.descript as description', 'username', 'images.filename as image', 'videos.filename as video'));
             $this->db->from('courses');
             $this->db->join('images', 'courses.courseID = images.courseID', 'inner');
             $this->db->join('patterns', 'courses.courseID = patterns.courseID', 'inner');
@@ -86,6 +86,27 @@
             $this->db->where('courses.courseID', $courseID);
             $this->db->limit(1);  
             return $this->db->get()->row();
+    }
+
+    public function get_reviews($courseID) {
+		$result = $this->db->select(array('reviews.title as title', 'reviews.review as review', 'reviews.rating as rating', 'users.username as username', 'reviews.createdDate as uploadDate'))
+				 ->join('users', 'users.ID = reviews.reviewerID', 'inner')
+                 ->where('courseID', $courseID)
+                 ->get('reviews');
+        return $result;
+	}
+
+    public function upload_review($reviewerID, $courseID, $title, $review, $rating, $createdDate) {
+        $data = array(
+            'reviewerID' => $reviewerID,
+            'courseID' => $courseID,
+            'title' => $title,
+            'review' => $review,
+			'rating' => $rating,
+			'createdDate' => $createdDate
+        );
+
+        $query = $this->db->insert('reviews', $data);
     }
 }
 ?>

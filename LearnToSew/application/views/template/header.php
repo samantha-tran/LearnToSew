@@ -4,7 +4,12 @@
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 			<script src="<?php echo base_url(); ?>assets/js/jquery-3.6.0.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
-	</head>
+      <!-- Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
 
   <body>
   <nav class="navbar navbar-light bg-light">
@@ -43,6 +48,10 @@
       <?php endif; ?>
     </ul>
 </nav>
-
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+</style>
 
 

@@ -14,20 +14,7 @@ class Login extends CI_Controller {
 		
 		if (!$this->session->userdata('logged_in'))
 		{
-			if (get_cookie('remember')) {
-				$username = get_cookie('username'); //get the username from cookie
-				$password = get_cookie('password'); //get the username from cookie
-				if ($this->user_model->login($username, $password)) {
-					$user_data = array(
-						'username' => $username,
-						'logged_in' => true //create session variable
-					);
-					$this->session->set_userdata($user_data);
-					redirect('home'); //redirect user to login page
-				}
-			} else {
-				$this->load->view('login', $data);
-			}
+			$this->load->view('login', $data);
 		} else {
 			redirect('home');
 		}
@@ -50,7 +37,7 @@ class Login extends CI_Controller {
 				);
 				if ($remember) { // if remember me is activated create cookie
 					set_cookie("username", $username, '300'); //set cookie username
-					set_cookie("password", $password, '300'); //set cookie password
+					set_cookie("password", $this->encryption->encrypt($password), '300'); //set cookie password
 					set_cookie("remember", $remember, '300'); //set cookie remember
 				}
 				$this->session->set_userdata($user_data);
@@ -61,6 +48,10 @@ class Login extends CI_Controller {
 		} else {
 			redirect('login'); //user is already logged in so redirect to homepage
 		}
+	}
+
+	public function forgot() {
+		$this->load->view('password_reset');
 	}
 
 	public function logout()

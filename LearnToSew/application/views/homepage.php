@@ -13,12 +13,12 @@
         </div>
     <?php form_close();?>
     
-	<div class="container">
+	<div class="px-5">
         <h1 class="title">Recently Uploaded Courses</h1>
 		<div class="row flex flex-wrap">
 			<?php 
 			$recent_course_template = "
-				<div class='col'>
+				<div class='col d-flex justify-content-center'>
 					<div class='card'>
 						<div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
 							<img src='%s' class='img-fluid fill'/>

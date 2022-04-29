@@ -50,5 +50,11 @@ class Course extends CI_Controller {
 		}
 	}
 
+	public function upload_review($courseID) {
+		$this->course_model->upload_review($this->user_model->get_ID($_SESSION['username']), $courseID, $this->input->post("title"), $this->input->post("review"), $this->input->post("rating"), date('Y-m-d H:i:s'));
+		redirect('course/details/'.$courseID);
+	}
+
+	
 	
 }
