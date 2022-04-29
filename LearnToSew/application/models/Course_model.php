@@ -96,6 +96,13 @@
         return $result;
 	}
 
+    public function get_average_rating($courseID) {
+        $result = $this->db->select_avg('rating')
+                 ->where('courseID', $courseID)
+                 ->get('reviews');
+        return $result->row()->rating;
+    }
+
     public function upload_review($reviewerID, $courseID, $title, $review, $rating, $createdDate) {
         $data = array(
             'reviewerID' => $reviewerID,

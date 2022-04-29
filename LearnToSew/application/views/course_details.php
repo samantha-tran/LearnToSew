@@ -1,8 +1,9 @@
 <div class="container" >
     <h1 class="text-center"><?php echo $course_details->title;?></h1>
     <img src="<?php echo base_url().'uploads/images/'.$course_details->image;?>"></img>
-    <p><?php echo $course_details->description;?></p>
-    <p><?php echo $course_details->username;?></p>
+    <p>Course Description: <?php echo $course_details->description;?></p>
+    <p>Author: <?php echo $course_details->username;?></p>
+    <p>Average Rating: <?php echo $this->course_model->get_average_rating($course_details->courseID);?></p>
     <video width="320" height="240" controls>
         <source src="<?php echo base_url().'uploads/videos/'.$course_details->video;?>" type="video/mp4">
     </video>
@@ -74,7 +75,7 @@
 
             <?php echo form_close(); ?>
         </div>
-    </div>"
+    </div>
     </div>
 </div>
 </body>
