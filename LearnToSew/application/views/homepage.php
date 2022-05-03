@@ -2,8 +2,9 @@
     <?php echo form_open('search/fetch');?>
         <div class="pt-4 input-group d-flex justify-content-center">
             <div class="form-outline">
-                <input type="search" autocomplete="off" id="search-box" list="search-results" name="search" placeholder="Search Courses" class="form-control search-box" />
-                <datalist id="search-results"></datalist>
+                <input type="search" id="search-box" list="search-results" name="search" placeholder="Search Courses" class="form-control search-box" />
+                <!--<datalist id="search-results"></datalist>-->
+                <div id="search-results"></div>
             </div>
             <button type="button" class="btn btn-primary search-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height=25px fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -81,10 +82,29 @@
         padding: 40px;
         text-align: center;
     }
+
+    #search-results {
+        position: absolute;
+        z-index: 999; /* Whatever number that keeps it above the menu */
+        width: 40vw;
+        
+    }
+
+    #search-item {
+        background-color: white;
+        border: solid 1px #17a2b8;
+        padding: 5px 10px;
+    }
+
+    #search-item-link:hover {
+        text-decoration: none;
+    }
 </style>
 <script>
     $(document).ready(function() {
         load_data();
+
+        place_search_result();
         
         function load_data(search) {
             $.ajax({
@@ -97,10 +117,11 @@
                         $('#search-results').html(response);
                     } else {
                         var obj = JSON.parse(response);
+                        console.log(obj);
                         if (obj.length > 0) {
                             var html = "";
                             $.each(obj, function(i, val) {
-                                html += "<option value='" + val.title + "'>";
+                                html += "<a id='search-item-link' href='" + "<?php echo base_url();?>" + "course/details/" + val.courseID + "'><div id='search-item'>" + val.title + "</div></a>";
                             });
                             console.log(html);
                             $('#search-results').html(html);
@@ -108,6 +129,16 @@
                     }
                 }
             })
+        }
+
+        function place_search_result() {
+            // get search box top
+            var top = parseInt($( "search-box" ).css('top'));
+            // get search box right
+            var right = parseInt($( "search-box" ).css('right'));
+
+            $( "#search-results" ).css('top', top + 40);
+            $( "#search-results" ).css('right', right);
         }
 
 

@@ -59,4 +59,19 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('logged_in'); //delete login status
 		redirect('login');
 	}
+/**
+	public function reset_password() {
+		$hash = md5(rand(0,1000));
+		$url = base_url()."login/reset?token=".$hash;
+		//insert token
+		//generate email
+	}
+
+	public fucntion reset() {
+		$token = $_GET['token'];
+		//verify whether the token exists //return true and delete token
+		//if token exists then prompt 
+		//otherwise echo you are not allowed
+	} 
+**/
 }

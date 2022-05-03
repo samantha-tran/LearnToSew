@@ -41,7 +41,7 @@
         if ($query == '') {
             return null;
         } else {
-            $this->db->select('title');
+            $this->db->select(array('courses.courseID as courseID', 'courses.title as title', 'courses.descript as description'));
             $this->db->from('courses');
             $this->db->like('title', $query);
             $this->db->or_like('descript', $query);
