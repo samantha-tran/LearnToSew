@@ -50,7 +50,7 @@ class Register extends CI_Controller {
                 'password_callable' => 'Password must contain at least one special character.'
             ));
 
-        if ($this->form_validation->run() == TRUE) {
+        if (($this->form_validation->run() == TRUE) && $this->captcha_model->verify_captcha()) {
             $data = array(
             'username' => $this->input->post('username'),
             'email' => $this->input->post('email'),
@@ -61,7 +61,16 @@ class Register extends CI_Controller {
             $this->user_model->register_user($data);
             redirect('login');
         } else {
-            $this->load->view('register');
+            if (!$this->captcha_model->verify_captcha()) {
+                $data = array(
+                    'captcha_error' => 'Captcha was invalid',
+                );
+            } else {
+                $data = array(
+                    'captcha_error' => '',
+                );
+            }
+            $this->load->view('register', $data);
         }
     }
 }

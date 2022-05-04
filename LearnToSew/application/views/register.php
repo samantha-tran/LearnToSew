@@ -43,31 +43,21 @@
 
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <label class="form-label" for="form3Example4c">Secret Question</label>
-                                    <select class="form-control" name="secret-question" aria-label="Default select example">
-                                        <option value="What is your mother's maiden name?" selected>What is your mother's maiden name?</option>
-                                        <option value="What was your first pet?">What was your first pet?</option>
-                                        <option value="What was the model of your first car?">What was the model of your first car?</option>
-                                        <option value="What was your father's middle name?">What was your father's middle name?</option>
-                                        <option value="What was your childhood nickname?">What was your childhood nickname?</option>
-                                        <option value="What is your oldest sibling's middle name?">What is your oldest sibling's middle name?</option>
-                                        <option value="In what city or town did your parents meet?">In what city or town did your parents meet?</option>
-                                    </select>
+                                    <label class="form-label" for="form3Example4c">Type the characters below:</label>
+                                    <div class="mb-2">
+                                        <?php $this->captcha_model->generate_captcha(); ?>
+                                    </div>
+                                    <input name="captcha" required="required" type="text" class="form-control" />
                                 </div>
                             </div>
-
-                            <div class="d-flex flex-row align-items-center mb-4">
-                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                <div class="form-outline flex-fill mb-0">
-                                    <label class="form-label" for="form3Example4c">Answer</label>
-                                    <input name="answer" required="required" type="text" value="<?php echo set_value('password'); ?>" class="form-control" />
-                                </div>
-                            </div>
-
+                            
                             <div>
                                 <?php 
                                     if (null != validation_errors()) {
-                                        echo "<div class='alert alert-danger' role='alert'>" . validation_errors() . "</div>";
+                                        echo "<div class='text-center alert alert-danger' role='alert'>" . validation_errors() . "</div>";
+                                    }
+                                    if (isset($captcha_error)) {
+                                        echo "<div class='alert alert-danger text-center' role='alert'>" . $captcha_error . "</div>";
                                     }
                                 ?>
                             </div>
