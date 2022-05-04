@@ -118,11 +118,17 @@
                             </div>
 
                             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                <a class="mx-auto" href="<?php echo BASE_URL(); ?>register">
+                                <a class="mx-auto" href="<?php echo BASE_URL(); ?>verify">
                                     <button type="button" class="btn btn-secondary btn-lg">Resend Email</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-lg mx-auto">Verify</button>
                             </div>
+
+                            <?php 
+                                if (isset($verify_error)) {
+                                    echo "<div class='alert alert-danger text-center' role='alert'>" . $verify_error . "</div>";
+                                }
+                            ?>
 
                             <?php echo form_close(); ?>
 

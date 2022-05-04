@@ -22,6 +22,10 @@ class Verify extends CI_Controller {
 
             //redirect to main page
             redirect('home');
+        } else {
+            $this->load->view('verify', array(
+                'verify_error' => 'Verification token was invalid.'
+            ));
         }
         
     }
