@@ -3,7 +3,15 @@
     <img src="<?php echo base_url().'uploads/images/'.$course_details->image;?>"></img>
     <p>Course Description: <?php echo $course_details->description;?></p>
     <p>Author: <?php echo $course_details->username;?></p>
-    <p>Average Rating: <?php echo $this->course_model->get_average_rating($course_details->courseID);?></p>
+    <p>Average Rating: <?php 
+        $rating = $this->course_model->get_average_rating($course_details->courseID);
+        if ($rating == null) {
+            echo 0;
+        } else {
+            echo $rating;
+        }
+        ?>
+    </p>
     <video width="320" height="240" controls>
         <source src="<?php echo base_url().'uploads/videos/'.$course_details->video;?>" type="video/mp4">
     </video>

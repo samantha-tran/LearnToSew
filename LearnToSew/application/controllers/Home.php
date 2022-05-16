@@ -23,12 +23,10 @@ class Home extends CI_Controller {
 		//only load if user is signed in and verified
 		if ($this->session->userdata('username') == null) {
 			redirect('login');
-		} else if ($this->user_model->is_verified($this->session->userdata('username'))) {
+		} else {
 			$this->load->view('template/header');
 			$this->load->view('homepage');
 			$this->load->view('template/footer');
-		} else {
-			redirect('verify');
 		}
 	}
 }

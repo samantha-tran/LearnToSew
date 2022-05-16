@@ -9,6 +9,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="522625626112-77khgppa3g0btsgnb46iduucsecj3iqg.apps.googleusercontent.com">
     </head>
   <body>
       <!-- FORM TEMPLATE FROM https://mdbootstrap.com/docs/standard/extended/login/ -->
@@ -71,11 +73,9 @@
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
+                        
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-                        <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
-                            role="button">
-                            <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-                        </a>
                         <?php echo form_close(); ?>
                     </div>
                 </div>
@@ -87,3 +87,12 @@
         font-family: 'Roboto', sans-serif;
     }
 </style>
+
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>

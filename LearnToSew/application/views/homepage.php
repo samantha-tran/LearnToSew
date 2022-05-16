@@ -20,7 +20,7 @@
 			<?php 
 			$recent_course_template = "
 				<div class='col d-flex justify-content-center'>
-					<div class='card'>
+					<div class='card my-4'>
 						<div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
 							<img src='%s' class='img-fluid fill'/>
 							<a href='#!'>
