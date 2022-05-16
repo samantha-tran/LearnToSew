@@ -73,8 +73,6 @@
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                         </div>
-                        
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
                         <?php echo form_close(); ?>
                     </div>

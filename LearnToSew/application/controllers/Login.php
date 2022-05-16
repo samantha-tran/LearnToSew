@@ -15,10 +15,13 @@ class Login extends CI_Controller {
 		if (!$this->session->userdata('logged_in'))
 		{
 			$this->load->view('login', $data);
+				
 		} else {
 			redirect('home');
 		}
 	}
+
+
 	public function check_login()
 	{
 		$data['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!</div> ";
@@ -59,6 +62,7 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('logged_in'); //delete login status
 		redirect('login');
 	}
+
 /**
 	public function reset_password() {
 		$hash = md5(rand(0,1000));
