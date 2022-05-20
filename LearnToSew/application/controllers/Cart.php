@@ -29,26 +29,24 @@ class Cart extends CI_Controller {
         $this->db->delete('cart');
     }
 
-    function buy($id){ 
+    function buy(){ 
+        $userID = $this->user_model->get_ID($_SESSION['username']);
         // Set variables for paypal form 
         $returnURL = base_url().'paypal/success'; //payment success url 
         $cancelURL = base_url().'paypal/cancel'; //payment cancel url 
         $notifyURL = base_url().'paypal/ipn'; //ipn url 
          
         // Get product data from the database 
-        $product = $this->product->getRows($id); 
-         
-        // Get current user ID from the session (optional) 
-        $userID = !empty($_SESSION['userID'])?$_SESSION['userID']:1; 
+        $totalCost = $this->cart_model->get_total_cost($userID);
          
         // Add fields to paypal form 
         $this->paypal_lib->add_field('return', $returnURL); 
         $this->paypal_lib->add_field('cancel_return', $cancelURL); 
         $this->paypal_lib->add_field('notify_url', $notifyURL); 
-        $this->paypal_lib->add_field('item_name', $product['name']); 
-        $this->paypal_lib->add_field('custom', $userID); 
-        $this->paypal_lib->add_field('item_number',  $product['id']); 
-        $this->paypal_lib->add_field('amount',  $product['price']); 
+        //$this->paypal_lib->add_field('item_name', $product['name']); 
+        $this->paypal_lib->add_field('custom', "test"); 
+        //$this->paypal_lib->add_field('item_number',  $product['id']); 
+        $this->paypal_lib->add_field('amount',  $totalCost); 
          
         // Render paypal form 
         $this->paypal_lib->paypal_auto_form(); 

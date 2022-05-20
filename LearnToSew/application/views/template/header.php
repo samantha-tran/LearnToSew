@@ -52,6 +52,8 @@
   body {
     font-family: 'Roboto', sans-serif;
   }
+  
+  xmp { font-family: inherit; font-size: 100% }
 </style>
 
 

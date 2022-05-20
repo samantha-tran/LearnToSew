@@ -28,8 +28,8 @@
 							</a>
 						</div>
 						<div class='card-body'>
-							<h5 class='card-title'>%s</h5>
-							<p class='card-text'>%s</p>
+							<h5 class='card-title'><xmp>%s</xmp></h5>
+							<p class='card-text'><xmp>%s</xmp></p>
                             <a href='%s' class='btn btn-primary'>View</a>
 						</div>
 					</div>

@@ -1,8 +1,8 @@
 <div class="container" >
-    <h1 class="text-center"><?php echo $course_details->title;?></h1>
+    <h1 class="text-center"><?php echo "<xmp>" . $course_details->title . "</xmp>";?></h1>
     <img src="<?php echo base_url().'uploads/images/'.$course_details->image;?>"></img>
-    <p>Course Description: <?php echo $course_details->description;?></p>
-    <p>Author: <?php echo $course_details->username;?></p>
+    <p>Course Description: <?php echo "<xmp>" . $course_details->description . "</xmp>";?></p>
+    <p>Author: <?php echo "<xmp>" . $course_details->username . "</xmp>";?></p>
     <p>Average Rating: <?php 
         $rating = $this->course_model->get_average_rating($course_details->courseID);
         if ($rating == null) {
@@ -23,9 +23,9 @@
             $reviewTemplate = "
             <div class='mb-3 card'>
                 <div class='card-body'>
-                    <h5 class='card-title'>%s</h5>
-                    <h6 class='card-subtitle text-muted'>%s</h6>
-                    <p class='card-text'>%s <br> Rating: %d/5</p>
+                    <h5 class='card-title'><xmp>%s</xmp></h5>
+                    <h6 class='card-subtitle text-muted'><xmp>%s</xmp></h6>
+                    <p class='card-text'><xmp>%s</xmp> <br> Rating: %d/5</p>
                 </div>
             </div>";
             foreach ($reviews->result() as $review) {

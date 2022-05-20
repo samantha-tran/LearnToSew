@@ -14,7 +14,7 @@
                 <?php 
                 $row_template = "
                     <tr id='%d'>
-                        <td>%s</td>
+                        <td><xmp>%s</xmp></td>
                         <td>%d</td>
                         <td style='width:90px'><button type='button' onClick='removeFromCart(%d)' class='btn btn-danger'><i class='far fa-trash-alt'></i></button></td>
                     </tr>";

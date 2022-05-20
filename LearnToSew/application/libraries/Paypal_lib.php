@@ -46,17 +46,13 @@ class Paypal_lib
         $this->ipn_log_file = $this->CI->config->item('paypal_lib_ipn_log_file'); 
         $this->ipn_log = $this->CI->config->item('paypal_lib_ipn_log');  
          
-        $this->button_path = $this->CI->config->item('paypal_lib_button_path'); 
-         
         // populate $fields array with a few default values. 
         // values can be overwritten by the calling script. 
         $businessEmail = $this->CI->config->item('business'); 
         $this->add_field('business',$businessEmail); 
         $this->add_field('rm','2');    // Return method = POST 
         $this->add_field('cmd','_xclick'); 
- 
         $this->add_field('currency_code', $this->CI->config->item('paypal_lib_currency_code')); 
-        $this->add_field('quantity', '1'); 
         $this->button('Pay Now!'); 
     } 
  
