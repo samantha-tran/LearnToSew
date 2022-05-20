@@ -23,8 +23,14 @@
                     echo sprintf($row_template, $row->cart_id, $row->title, $row->price, $row->cart_id);
                 }
                 ?>
+                <tr>
+                    <td id="total-cost" colspan="3" class="text-right">
+                        Total Cost: <?php echo $this->cart_model->get_total_cost($this->user_model->get_ID($_SESSION['username']))?>
+                    </td>
+                </tr>
         </tbody>
         </table>
+        <a href="<?php echo base_url()."cart/buy"; ?>" class="btn"><img src="<?php echo base_url()."./assets/img/paypal-btn.PNG"; ?>" /></a>
     </div>
 </html>
 
@@ -40,8 +46,10 @@
                     alert("Problem removing from cart. Try again later.");
                 },
                 success: function(response) {
-                    //remove from html
+                    //remove table row from html
                     $(`#${cart_id}`).remove();
+                    //update total costs
+                    $('#total-cost').html("Total Cost: test" + "<?php echo $this->cart_model->get_total_cost($this->user_model->get_ID($_SESSION['username']));?>");
                 }
             });
         }

@@ -10,5 +10,13 @@
 
             return $result;
         }
+
+        public function get_total_cost($userID) {
+            $this->db->select('sum(courses.price) as cost');
+            $this->db->join('courses', 'courses.courseID = cart.course_id');
+            $this->db->where('user_id', $userID);
+            $result = $this->db->get('cart');
+            return $result->row()->cost;
+        }
     }
 ?>
