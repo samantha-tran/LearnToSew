@@ -39,6 +39,11 @@
             }
         ?>
     </div>
+    <div>
+        <button id="cart-button" type="button" onclick="addToCart()" class="btn btn-primary btn-lg">
+            Add To Cart
+        </button>
+    </div>
     <div class='mb-3 card'>
         <div class='card-body'>
             <h3>Write A Review</h3>
@@ -87,3 +92,42 @@
     </div>
 </div>
 </body>
+
+<script>
+
+    function addToCart() {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url().'cart/add';?>",
+            data: {
+                courseID: <?php echo $course_details->courseID;?>,
+                userID: <?php echo $this->user_model->get_ID($_SESSION['username'])?>
+            },
+            error: function(response) {
+                alert("Problem adding to cart. Try again later.");
+            },
+            success: function(response) {
+                $("#cart-button").attr("onclick","removeFromCart()");
+                $("#cart-button").html("Remove From Cart");
+            }
+        });
+    }
+
+    function removeFromCart() {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url().'cart/remove';?>",
+            data: {
+                courseID: <?php echo $course_details->courseID;?>,
+                userID: <?php echo $this->user_model->get_ID($_SESSION['username'])?>
+            },
+            error: function(response) {
+                alert("Problem removing from cart. Try again later.");
+            },
+            success: function(response) {
+                $("#cart-button").attr("onclick","addToCart()");
+                $("#cart-button").html("Add To Cart");
+            }
+        });
+    }
+</script>

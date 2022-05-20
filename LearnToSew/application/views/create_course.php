@@ -15,8 +15,8 @@
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Course Difficulty</label>
         <select class="custom-select my-1 mr-sm-2" name='difficulty' required>
             <option value="Beginner">Beginner</option>
-            <option value="2">Intermediate</option>
-            <option value="3">Advanced</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
         </select>
     </div>
     <div class="form-group">
