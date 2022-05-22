@@ -3,17 +3,18 @@
  class Reset_model extends CI_Model{
 
     public function insert_token($hash, $userID) {
+        $currentTime = date("Y-m-d H:i:s");
         $data = array(
             'token' => $hash,
             'user_id' => $userID,
-            'expiry_time' => time() + 1800
+            'expiry_time' => date('Y-m-d H:i:s', strtotime('+5 minutes', strtotime($currentTime)))
         );
         $this->db->insert('reset_tokens', $data);
     }
 
     public function token_exists($token) {
         //delete all tokens that have expired
-        $this->db->where('expiry_time >=', time());
+        $this->db->where('expiry_time <=', date("Y-m-d H:i:s"));
         $this->db->delete('reset_tokens');
 
         //check if token exists
