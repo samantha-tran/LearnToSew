@@ -27,7 +27,7 @@
                               </button>";
                     } else {
                         echo "<button id='cart-button' type='button' onclick='addToCart()' class='btn btn-primary btn-lg'>
-                                Add To Cart
+                                Add Patterns To Cart
                               </button>";
                     }
                 ?>
@@ -159,7 +159,7 @@
             },
             success: function(response) {
                 $("#cart-button").attr("onclick","addToCart()");
-                $("#cart-button").html("Add To Cart");
+                $("#cart-button").html("Add Patterns To Cart");
             }
         });
     }

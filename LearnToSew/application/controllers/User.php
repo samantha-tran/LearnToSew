@@ -89,4 +89,11 @@ class User extends CI_Controller {
 		}
 		
 	}
+
+	public function patterns() {
+        $purchased_patterns = $this->pattern_model->get_purchased_patterns($this->user_model->get_ID($_SESSION['username']));
+		$this->load->view('template/header');
+		$this->load->view('patterns', array('patterns' => $purchased_patterns));
+		$this->load->view('template/footer');
+	}
 }

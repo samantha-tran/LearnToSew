@@ -48,6 +48,9 @@
             </div>
         </div>
     </div>
+    <div>
+        <p class="center-text">Note: Images must be under 1000px x 1000px. Images will be cropped / resized to size of 500px x 500px from the top left corner.</p>
+    </div>
     <?php echo $error ?>
     <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
     <?php echo form_close(); ?>

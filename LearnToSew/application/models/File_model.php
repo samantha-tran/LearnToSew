@@ -38,11 +38,25 @@
 		$config['upload_path'] = 'uploads/images';
 		$config['allowed_types'] = 'jpg|jpeg|png';
 		$config['max_size'] = 10000;
-		$config['max_width'] = 500;
-		$config['max_height'] = 500;
+		$config['max_width'] = 1000;
+		$config['max_height'] = 1000;
 
 		return $this->file_model->do_upload('thumbnail', 'images', $courseID, $config);
     }
+
+	public function crop_thumbail($filepath) {
+		$config['image_library'] = 'gd2';
+		$config['source_image'] = $filepath;
+		$config['maintain_ratio'] = FALSE;
+		$config['width'] = 500;
+		$config['height'] = 500;
+		$config['x_axis'] = '0';
+		$config['y_axis'] = '0';
+
+		$this->image_lib->initialize($config);
+
+		return $this->image_lib->crop();
+	}
 
     public function upload_video($courseID) {
         //upload video

@@ -121,7 +121,7 @@
                         if (obj.length > 0) {
                             var html = "";
                             $.each(obj, function(i, val) {
-                                html += "<a id='search-item-link' href='" + "<?php echo base_url();?>" + "course/details/" + val.courseID + "'><div id='search-item'>" + val.title + "</div></a>";
+                                html += "<a id='search-item-link' href='" + "<?php echo base_url();?>" + "course/details/" + val.courseID + "'><div id='search-item'><xmp>" + val.title + "</xmp></div></a>";
                             });
                             console.log(html);
                             $('#search-results').html(html);

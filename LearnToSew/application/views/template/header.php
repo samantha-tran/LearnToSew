@@ -20,7 +20,7 @@
       </li>
       <?php if($this->session->userdata('logged_in')) : ?>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url();?>user"> My Courses </a>
+            <a class="nav-link" href="<?php echo base_url();?>user/patterns"> My Patterns </a>
         </li>
       <?php endif; ?>
       <li class="nav-item">
