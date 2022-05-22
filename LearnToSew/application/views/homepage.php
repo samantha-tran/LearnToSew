@@ -35,7 +35,7 @@
 					</div>
 				</div>
 			";
-            $recent_courses = $this->course_model->get_recent_courses();
+            $recent_courses = $this->course_model->get_recent_courses(50);
 			foreach ($recent_courses->result() as $row) {
                 
                 $thumbnail = $this->course_model->get_course_thumbnail($row->courseID);
@@ -105,6 +105,20 @@
         load_data();
 
         place_search_result();
+
+        restore_scroll_position();
+
+        function restore_scroll_position() {
+            if (localStorage.scroll_position) {
+                $(window).scrollTop(localStorage.scroll_position);
+                //alert("restored scroll to position " + localStorage.scroll_position);
+            }
+        }
+
+        //Add handler so each click scroll saves scroll position
+        $(window).on("scroll", function() {
+            localStorage.setItem("scroll_position", $(window).scrollTop());
+        });
         
         function load_data(search) {
             $.ajax({
