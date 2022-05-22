@@ -59,7 +59,7 @@
                                 <input class="form-check-input" type="checkbox" value="1" name="remember" checked="checked"/>
                                 <label class="form-check-label"> Remember me </label>
                             </div>
-                            <a href="<?php echo BASE_URL(); ?>forgot">Forgot Password</a>
+                            <a href="<?php echo BASE_URL(); ?>reset/reset_email">Forgot Password</a>
                             
                         </div>
 

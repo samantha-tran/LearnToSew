@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Reset extends CI_Controller {
 
     public function __construct() {
         parent:: __construct();
@@ -9,63 +9,11 @@ class Login extends CI_Controller {
 		$this->load->model('reset_model');
     }
 
-	public function index()
-	{
-		$data['error'] = "";
-		
-		if (!$this->session->userdata('logged_in'))
-		{
-			$this->load->view('login', $data);
-				
-		} else {
-			redirect('home');
-		}
-	}
-
-
-	public function check_login()
-	{
-		$data['error'] = "<div class=\"alert alert-danger\" role=\"alert\"> Incorrect username or password!</div> ";
-
-		$username = $this->input->post('username'); //get username from login form
-		$password = $this->input->post('password'); //get password from login form
-		$remember = $this->input->post('remember'); //get remember me from login form
-
-		if (!$this->session->userdata('logged_in')) //check if user is already logged in
-		{
-			if ($this->user_model->login($username, $password)) //check if username and password is valid
-			{
-				$user_data = array(
-					'username' => $username,
-					'logged_in' => true //create session variable
-				);
-				if ($remember) { // if remember me is activated create cookie
-					set_cookie("username", $username, '300'); //set cookie username
-					set_cookie("password", $this->encryption->encrypt($password), '300'); //set cookie password
-					set_cookie("remember", $remember, '300'); //set cookie remember
-				}
-				$this->session->set_userdata($user_data);
-				redirect('login'); //redirect user to login page
-			} else {
-				$this->load->view('login', $data); //if username and/or password is incorrect, show error message and ask user to re-attempt login
-			}
-		} else {
-			redirect('login'); //user is already logged in so redirect to homepage
-		}
-	}
-
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in'); //delete login status
-		redirect('login');
-	}
-
-
 	public function reset_email() {
 		$this->load->view('get_reset_email');
 	}
 
-	public function reset_password() {
+	public function send_reset_email() {
 		$email = $this->input->post('email');
 		$uid = $this->user_model->get_ID_from_email($email);
 
@@ -74,7 +22,7 @@ class Login extends CI_Controller {
 		} else {
 			//generate reset token
 			$hash = md5(rand(0,1000));
-			$url = base_url()."login/reset?token=".$hash;
+			$url = base_url()."reset/reset?token=".$hash;
 			//insert token
 			$this->reset_model->insert_token($hash, $uid);
 			//generate email
@@ -100,9 +48,14 @@ class Login extends CI_Controller {
 
 			echo sprintf("An email containing password reset link has been sent to %s", $email);
 		}
-
-		
 	}
+
+    public function reset_password() {
+        $password = $this->input->post('password');
+        $uid = $this->input->post('uid');
+        $this->user_model->update_user_details($uid, "", "", $password);
+        echo "Password successfully reset. Click <a href='" . base_url() . "login'>here </a> To return to the login page.";
+    }
 
 	public function reset() {
 		$token = $_GET['token'];

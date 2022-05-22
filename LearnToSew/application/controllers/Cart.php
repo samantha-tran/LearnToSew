@@ -7,13 +7,14 @@ class Cart extends CI_Controller {
         parent::__construct(); 
          
         // Load paypal library 
-        $this->load->library('paypal_lib'); 
+	$this->load->library('paypal_lib');
+        $this->load->model('cart_model');	
     } 
 
     public function index() {
         $this->load->view('template/header');
         $this->load->view('cart');
-        $this->load->view('template/footer');
+	$this->load->view('template/footer');
     }
 	public function add() {
         $data = array(
@@ -24,9 +25,11 @@ class Cart extends CI_Controller {
     }
 
     public function remove() {
-        var_dump($this->input->post('cartID'));
+        //var_dump($this->input->post('cartID'));
         $this->db->where('cart_id', $this->input->post('cartID'));
         $this->db->delete('cart');
+        $temp['cost'] = $this->cart_model->get_total_cost($this->user_model->get_ID($_SESSION['username']));
+        echo json_encode($temp);
     }
 
     function buy(){ 

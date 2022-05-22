@@ -12,12 +12,10 @@
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-4">
-                            <?php 
-                                $hidden = array('uid' => $uid);
-                                echo form_open(base_url().'reset/reset_password', '', $hidden); ?>
+                            <?php echo form_open(base_url().'reset/send_reset_email'); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label>Please Enter The Email Associated With Your Account</label>
+                                    <input name="email" type="email" class="form-control" id="exampleInputPassword1" placeholder="email">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn btn-primary">Reset</button>

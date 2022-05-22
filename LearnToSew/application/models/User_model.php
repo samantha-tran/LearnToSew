@@ -103,6 +103,29 @@
         return $result->id;
     }
 
+    public function get_ID_from_email($email) {
+        $result = $this->db->select('id')
+                 ->where('email', $email)
+                 ->limit(1)
+                 ->get('users')
+                 ->row();
+        if (isset($result)) {
+            return $result->id;
+        } else {
+            return null;
+        }
+    }
+
+    public function get_username($uid) {
+        $result = $this->db->select('username')
+                    ->where('id', $uid)
+                    ->limit(1)
+                    ->get('users')
+                    ->row();
+            return $result->username;
+        
+    }
+
     public function is_verified($username) {
         $result = $this->db->select('is_verified')
                  ->where('username', $username)
@@ -119,6 +142,7 @@
         return $result->row();
     }
 
+
     public function update_user_details($userID, $username, $email, $password) {
         //check which fields are to be updated
         if ($username) {
@@ -128,7 +152,7 @@
             $data['email'] = $email;
         }
         if ($password) {
-            $data['password'] = $password;
+            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
         }
 
         if ($username || $email || $password) {

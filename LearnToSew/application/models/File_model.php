@@ -32,6 +32,8 @@
 	}
 
     public function upload_thumbnail($courseID) {
+		//resize the image and centre
+		
         //upload thumbail image
 		$config['upload_path'] = 'uploads/images';
 		$config['allowed_types'] = 'jpg|jpeg|png';

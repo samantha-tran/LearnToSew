@@ -49,8 +49,9 @@
                     //remove table row from html
                     $(`#${cart_id}`).remove();
                     //update total costs
-                    $('#total-cost').html("Total Cost: test" + "<?php echo $this->cart_model->get_total_cost($this->user_model->get_ID($_SESSION['username']));?>");
+                    var obj = JSON.parse(response);
+                    $('#total-cost').html("Total Cost: " + obj['cost']);
                 }
             });
-        }
+	}
 </script>

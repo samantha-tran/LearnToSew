@@ -1,21 +1,44 @@
 <div class="container" >
-    <h1 class="text-center"><?php echo "<xmp>" . $course_details->title . "</xmp>";?></h1>
-    <img src="<?php echo base_url().'uploads/images/'.$course_details->image;?>"></img>
-    <p>Course Description: <?php echo "<xmp>" . $course_details->description . "</xmp>";?></p>
-    <p>Author: <?php echo "<xmp>" . $course_details->username . "</xmp>";?></p>
-    <p>Average Rating: <?php 
-        $rating = $this->course_model->get_average_rating($course_details->courseID);
-        if ($rating == null) {
-            echo 0;
-        } else {
-            echo $rating;
-        }
-        ?>
-    </p>
-    <video width="320" height="240" controls>
-        <source src="<?php echo base_url().'uploads/videos/'.$course_details->video;?>" type="video/mp4">
-    </video>
-    
+    <div class="row">
+        <div class="col">
+        <h1 class="text-center"><?php echo "<xmp>" . $course_details->title . "</xmp>";?></h1>
+        </div>
+    </div>
+    <div class="row py-5">
+        <div class="col">
+            <p><?php echo "<xmp>Author: " . $course_details->username . "</xmp>";?></p>
+            <p>Average Rating: <?php 
+                $rating = $this->course_model->get_average_rating($course_details->courseID);
+                if ($rating == null) {
+                    echo 0;
+                } else {
+                    echo $rating;
+                }
+                ?>
+            </p>
+            <div id="description">
+                <p >Course Description: <?php echo "<xmp>" . $course_details->description . "</xmp>";?></p>
+            </div>
+            <div>
+                <?php
+                    if ($this->cart_model->is_in_cart($this->user_model->get_ID($_SESSION['username']), $course_details->courseID)) {
+                        echo "<button id='cart-button' type='button' onclick='removeFromCart()' class='btn btn-primary btn-lg'>
+                                Remove From Cart
+                              </button>";
+                    } else {
+                        echo "<button id='cart-button' type='button' onclick='addToCart()' class='btn btn-primary btn-lg'>
+                                Add To Cart
+                              </button>";
+                    }
+                ?>
+            </div>
+        </div>
+        <div class="col">
+            <video width="400" height="300" controls>
+                <source src="<?php echo base_url().'uploads/videos/'.$course_details->video;?>" type="video/mp4">
+            </video>
+        </div>
+    </div>
     <!-- User should only be able to write a review if they've purchased this course -->
     <div class="reviews">
         <?php 
@@ -28,22 +51,28 @@
                     <p class='card-text'><xmp>%s</xmp> <br> Rating: %d/5</p>
                 </div>
             </div>";
-            foreach ($reviews->result() as $review) {
-                echo sprintf(
-                    $reviewTemplate, 
-                    $review->title = null ? "" : $review->title,
-                    $review->username,
-                    $review->review = null ? "" : $review->review,
-                    $review->rating = null ? "" : $review->rating
-                );
+
+            if (count($reviews->result()) == 0) {
+                echo "<div class='mb-3 card'>
+                        <div class='card-body'>
+                            <h5 class='card-title text-center'>No Reviews For This Course Yet...</h5>
+                        </div>
+                      </div>";
+            } else {
+                foreach ($reviews->result() as $review) {
+                    echo sprintf(
+                        $reviewTemplate, 
+                        $review->title = null ? "" : $review->title,
+                        $review->username,
+                        $review->review = null ? "" : $review->review,
+                        $review->rating = null ? "" : $review->rating
+                    );
+                }
             }
+            
         ?>
     </div>
-    <div>
-        <button id="cart-button" type="button" onclick="addToCart()" class="btn btn-primary btn-lg">
-            Add To Cart
-        </button>
-    </div>
+    
     <div class='mb-3 card'>
         <div class='card-body'>
             <h3>Write A Review</h3>
@@ -93,6 +122,11 @@
 </div>
 </body>
 
+<style>
+    #description {
+        height: 150px;
+    }
+</style>
 <script>
 
     function addToCart() {
@@ -118,8 +152,7 @@
             type: "POST",
             url: "<?php echo base_url().'cart/remove';?>",
             data: {
-                courseID: <?php echo $course_details->courseID;?>,
-                userID: <?php echo $this->user_model->get_ID($_SESSION['username'])?>
+                cartID: <?php echo $this->cart_model->get_cartID($this->user_model->get_ID($_SESSION['username']), $course_details->courseID);?>
             },
             error: function(response) {
                 alert("Problem removing from cart. Try again later.");

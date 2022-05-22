@@ -76,10 +76,13 @@ class User extends CI_Controller {
 			$this->load->view('template/footer');
 		} else {
 			// update details in DB
-			echo $this->user_model->update_user_details($this->user_model->get_ID($_SESSION['username']), $username, $email, $password);
+			$this->user_model->update_user_details($this->user_model->get_ID($_SESSION['username']), $username, $email, $password);
 
-			// update session details
-			$this->session->set_userdata('username', $username);
+			// update session username if username was changed
+			if ($username) {
+				$this->session->set_userdata('username', $username);
+			}
+			
 			$this->load->view('template/header');
 			$this->load->view('user_details', array('error' => "", 'user_details' => $this->user_model->get_user_details($_SESSION['username'])));
 			$this->load->view('template/footer');
