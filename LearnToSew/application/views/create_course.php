@@ -51,7 +51,9 @@
     <div>
         <p class="center-text">Note: Images must be under 1000px x 1000px. Images will be cropped / resized to size of 500px x 500px from the top left corner.</p>
     </div>
-    <?php echo $error ?>
+    <?php if ($error) {
+        echo "<div class='text-center alert alert-danger' role='alert'>" . $error . "</div>"; 
+    }?>
     <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
     <?php echo form_close(); ?>
 </div>

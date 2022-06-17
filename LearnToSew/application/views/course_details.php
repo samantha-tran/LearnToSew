@@ -21,8 +21,12 @@
             </div>
             <div>
                 <?php
-                    if ($this->cart_model->is_in_cart($this->user_model->get_ID($_SESSION['username']), $course_details->courseID)) {
-                        echo "<button id='cart-button' type='button' onclick='removeFromCart()' class='btn btn-primary btn-lg'>
+                    if ($this->pattern_model->is_purchased($this->user_model->get_ID($_SESSION['username']), $course_details->courseID)) {
+                        echo "<button type='button'class='btn btn-secondary btn-lg'>
+                                Already Purchased
+                              </button>";
+                    } else if ($this->cart_model->is_in_cart($this->user_model->get_ID($_SESSION['username']), $course_details->courseID)) {
+                        echo "<button id='cart-button' type='button' onclick='removeFromCart()' class='btn btn-secondary btn-lg'>
                                 Remove From Cart
                               </button>";
                     } else {
@@ -44,7 +48,7 @@
         <?php 
             $reviews = $this->course_model->get_reviews($course_details->courseID);
             $reviewTemplate = "
-            <div class='mb-3 card'>
+            <div class='mb-3 card card-blue'>
                 <div class='card-body'>
                     <h5 class='card-title'><xmp>%s</xmp></h5>
                     <h6 class='card-subtitle text-muted'><xmp>%s</xmp></h6>
@@ -53,7 +57,7 @@
             </div>";
 
             if (count($reviews->result()) == 0) {
-                echo "<div class='mb-3 card'>
+                echo "<div class='mb-3 card card-blue'>
                         <div class='card-body'>
                             <h5 class='card-title text-center'>No Reviews For This Course Yet...</h5>
                         </div>
@@ -73,8 +77,8 @@
         ?>
     </div>
     
-    <div class='mb-3 card'>
-        <div class='card-body'>
+    <div class='mb-3 card card-blue'>
+        <div class='card-body '>
             <h3>Write A Review</h3>
             <?php echo form_open(base_url().'course/upload_review/'.$course_details->courseID); ?>
             <div class="form-group">
@@ -126,6 +130,10 @@
     #description {
         height: 150px;
     }
+
+    .card-blue {
+        background-color: #D2E8FF;
+    }
 </style>
 <script>
 
@@ -143,6 +151,7 @@
             success: function(response) {
                 $("#cart-button").attr("onclick","removeFromCart()");
                 $("#cart-button").html("Remove From Cart");
+                $("#cart-button").removeClass("btn-primary").addClass("btn-secondary");
             }
         });
     }
@@ -160,6 +169,7 @@
             success: function(response) {
                 $("#cart-button").attr("onclick","addToCart()");
                 $("#cart-button").html("Add Patterns To Cart");
+                $("#cart-button").removeClass("btn-secondary").addClass("btn-primary");
             }
         });
     }

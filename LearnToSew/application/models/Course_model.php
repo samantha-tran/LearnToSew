@@ -9,13 +9,8 @@
         //upload course details
         $courseID = $this->upload_course_details($title, $description, $difficulty, $price);
         $success = $success && $this->file_model->upload_thumbnail($courseID);
-
-        //resize image
-        var_dump($success);
-        var_dump($this->course_model->get_course_path($courseID));
         
         $success = $success && $this->file_model->crop_thumbail($this->course_model->get_course_path($courseID));
-        var_dump($success);
         $success = $success && $this->file_model->upload_video($courseID);
         $success = $success && $this->file_model->upload_patterns($courseID);
 

@@ -10,5 +10,13 @@
                 ->get('purchases');
         return $result;
     }
+
+    function is_purchased($uid, $cid) {
+        $result = $this->db->select('1')
+                ->where('user_id', $uid)
+                ->where('course_id', $cid)
+                ->get('purchases');
+        return $result->num_rows() >= 1;
+    }
 }
 ?>

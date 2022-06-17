@@ -14,32 +14,30 @@
         </div>
     <?php form_close();?>
     
-	<div class="px-5">
+	<div>
         <h1 class="title">Recently Uploaded Courses</h1>
-		<div class="row flex flex-wrap">
+		<div class="row flex flex-wrap justify-content-center">
 			<?php 
 			$recent_course_template = "
+            <a class='card-link' href='%s'>
 				<div class='col d-flex justify-content-center'>
 					<div class='card my-4'>
-						<div class='bg-image hover-overlay ripple' data-mdb-ripple-color='light'>
-							<img src='%s' class='img-fluid fill'/>
-							<a href='#!'>
-							<div class='mask' style='background-color: rgba(251, 251, 251, 0.15);'></div>
-							</a>
+						<div class='bg-image'>
+							<img src='%s' class='fill'/>
 						</div>
 						<div class='card-body'>
-							<h5 class='card-title'><xmp>%s</xmp></h5>
-							<p class='card-text'><xmp>%s</xmp></p>
-                            <a href='%s' class='btn btn-primary'>View</a>
+							<h5><xmp>%s</xmp></h5>
+							<p><xmp>%s</xmp></p>
 						</div>
 					</div>
 				</div>
+            </a>
 			";
             $recent_courses = $this->course_model->get_recent_courses(50);
 			foreach ($recent_courses->result() as $row) {
                 
                 $thumbnail = $this->course_model->get_course_thumbnail($row->courseID);
-				echo sprintf($recent_course_template, base_url().'uploads/images/'.$thumbnail->filename, $row->title, $row->descript, base_url()."course/details/".$row->courseID);
+				echo sprintf($recent_course_template, base_url()."course/details/".$row->courseID, base_url().'uploads/images/'.$thumbnail->filename, $row->title, $row->descript);
 			}
 			?>
 		</div>
@@ -72,15 +70,25 @@
     .fill {
         object-fit: cover;
         width: 100%;
+        height: 200px;
     }
 
     .card {
-        width: 300px;
+        width: 18rem;
     }
 
     .title {
         padding: 40px;
         text-align: center;
+    }
+
+    .card-link:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    .card-link {
+        color: black;
     }
 
     #search-results {

@@ -1,5 +1,4 @@
 <html>
-<html>
 	<head>
         <title>Learn To Sew</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
@@ -10,7 +9,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="522625626112-77khgppa3g0btsgnb46iduucsecj3iqg.apps.googleusercontent.com">
     </head>
   <body>
       <!-- FORM TEMPLATE FROM https://mdbootstrap.com/docs/standard/extended/login/ -->
@@ -18,7 +16,7 @@
             <div class="container py-5 h-100">
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <div class="col-md-8 col-lg-7 col-xl-6">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                        <img class="my-4" src="<?php echo base_url() . "./assets/img/learntosew-borderless.png";?>"
                         class="img-fluid" alt="Phone image">
                     </div>
                     <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
@@ -69,10 +67,6 @@
                         <a href="<?php echo BASE_URL();?>register">
                             <button type="button" class="mb-2 mt-2 btn btn-secondary btn-lg btn-block">Register</button>
                         </a>
-
-                        <div class="divider d-flex align-items-center my-4">
-                            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                        </div>
 
                         <?php echo form_close(); ?>
                     </div>

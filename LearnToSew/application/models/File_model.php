@@ -49,7 +49,7 @@
 		$config['source_image'] = $filepath;
 		$config['maintain_ratio'] = FALSE;
 		$config['width'] = 500;
-		$config['height'] = 500;
+		$config['height'] = 300;
 		$config['x_axis'] = '0';
 		$config['y_axis'] = '0';
 

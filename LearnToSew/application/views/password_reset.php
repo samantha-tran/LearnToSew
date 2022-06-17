@@ -16,7 +16,7 @@
                                 $hidden = array('uid' => $uid);
                                 echo form_open(base_url().'reset/reset_password', '', $hidden); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
+                                    <label for="exampleInputPassword1">Enter Your New Password</label>
                                     <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
                                 <div class="d-flex justify-content-center">
