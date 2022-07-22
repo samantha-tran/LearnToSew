@@ -15,7 +15,7 @@ instructors can easily monetise their content and students can lear
 ![](demo-images/9.PNG)
 
 ## Profile 
-![](demo-images/1.PNG)
+![](demo-images/6.PNG)
 
 ## Explore 
 ![](demo-images/3.PNG)
